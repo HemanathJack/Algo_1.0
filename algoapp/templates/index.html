@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Algo Demo HTML</h1>
+<h1>Enter Stock Details</h1>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Submit</button>
+  <a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
+</form>
+
+<!-- Add a container for the subplot -->
+<div 
+  id="subplot-container"
+  style="
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 1000px;
+    width: 1000px;
+    margin: 0 auto;
+    display : none;
+  "
+  
+>
+  {{ subplot_html | safe }}
+</div>
+
+<div
+  id="chartOpenDate"
+  style="
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 1000px;
+    width: 1000px;
+    margin: 0 auto;
+  "
+>
+  {{ chart_html | safe }}
+</div>
+
+{% for key, value in dictvalue.items %}
+<li>{{ key }}: {{ value }}</li>
+{% endfor %} {% endblock %}

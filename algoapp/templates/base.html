@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algo Master</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <style>
+      /* Add your global styles here */
+      /* Add styling for the sidebar and other elements here */
+      .sidebar {
+        width: 250px;
+        background-color: #967bb6;
+        padding: 20px;
+        position: fixed;
+        height: 100%;
+        transition: width 0.3s;
+      }
+
+      /* Styling for the content area */
+      .content {
+        margin-left: 250px; /* Width of the sidebar */
+        padding: 20px;
+        text-align: center;
+        transition: margin-left 0.3s;
+      }
+
+      /* Collapsed state for the sidebar */
+      .collapsed {
+        width: 0; /* Hide the sidebar when collapsed */
+      }
+
+      /* Styling for the "Home" button */
+      .glass-button {
+        display: block;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin: 10px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 10px;
+        transition: background 0.3s;
+      }
+
+      /* Change button background on hover */
+      .glass-button:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Apply specific styling for the collapsed state */
+      .glass-button.collapsed {
+        /* Add your styling here */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-buttons">
+        <span class="maximize-button" onclick="maximizeSidebar()">➝</span>
+        <span class="sidebar-button" onclick="toggleSidebar()">☰</span>
+      </div>
+      <a
+        href="{% url 'home' %}"
+        class="glass-button{% if sidebar_collapsed %} collapsed{% endif %}"
+        >Home</a
+      >
+      <!-- Add other sidebar links here if needed -->
+    </div>
+    <div class="content">
+      {% block content %}
+      <!-- Content of individual pages will be inserted here -->
+      {% endblock %}
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("collapsed");
+      }
+    </script>
+  </body>
+</html>
